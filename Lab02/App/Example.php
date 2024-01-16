@@ -1,22 +1,29 @@
 <?php
+
 namespace App;
 // Lớp Xe
 class Example
 {
+    private $_phone;
+    public $age;
     public $name;
-    public function __construct()
+
+    public function __construct($name, $age, $_phone)
     {
-        echo 'ví dụ';
+//        echo 'ví dụ';
+        $this->name = $name;
+        $this->age = $age;
+        $this->_phone = $_phone;
     }
 
     public function getName()
     {
-        return $this->name;
+        echo "My name is $this->name";
     }
 
-    public function setName($name)
+    public function __destruct()
     {
-        $this->name = $name;
+        echo "Tên: $this->name, tuổi: $this->age, SĐT: $this->_phone";
     }
 }
 

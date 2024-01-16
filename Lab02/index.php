@@ -24,8 +24,8 @@ $route = new Route();
 $model = new BaseModel();
 $controller = new BaseController();
 //
-//$db = new Example();
-//$db -> setName('Nam');
+$db = new Example(12,12,'0987654321');
+ echo ($db->name + $db->age);
 //var_dump($db -> getName());
 
 ?>
