@@ -2,7 +2,8 @@
 
 namespace App\Core;
 
-class Field{
+class Field
+{
     public const TYPE_TEXT = 'text';
     public const TYPE_PASSWORD = 'password';
     public const TYPE_NUMBER = 'number';
@@ -12,23 +13,42 @@ class Field{
 
     public function __construct(string $attribute)
     {
-        $this -> type = self::TYPE_TEXT;
-        $this -> attribute = $attribute;
+        $this->type = self::TYPE_TEXT;
+        $this->attribute = $attribute;
     }
 
-    public function __toString(){
-
+    public function __toString()
+    {
+        return sprintf('
+            <div class="mb-3">
+                <label for="">%s</label>
+                <input type="%s" name="%s" class="form-control">
+            </div>
+        ',
+            $this->getLabel($this->attribute),
+            $this->type,
+            $this->attribute
+        );
     }
 
-    public function passwordField(){
-
+    public function passwordField()
+    {
+        $this->type = self::TYPE_PASSWORD;
+        return $this;
     }
 
-    public function labels():array{
-
+    public function labels(): array
+    {
+        return [
+            'firstname' => 'First name',
+            'lastname' => 'Last name',
+            'password' => 'Password',
+            'confirmPassword' => 'Confirm Password',
+        ];
     }
 
-    public function getLabel($attribute){
-
+    public function getLabel($attribute)
+    {
+        return $this->labels()[$attribute] ?? $attribute;
     }
 }
