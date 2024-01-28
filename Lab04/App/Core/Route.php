@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Core;
-
+use \RouteNotFoundException;
 class Route
 {
     protected array $routes;
@@ -26,7 +26,8 @@ class Route
         $route = explode('?', $requestUrl) [0];
         $action = $this->routes[$requestMethod][$route] ?? null;
         if (!$action) {
-            echo '<h2>Lỗi không tìm thấy trang</h2>';
+            throw new RouteNotFoundException();
+            // echo '<h2>Lỗi không tìm thấy trang</h2>';
         }
         if (is_callable($action)) {
             return call_user_func($action);
@@ -36,7 +37,7 @@ class Route
 
             if (class_exists($class)) {
                 $class = new $class();
-                var_dump($class);
+                // var_dump($class);
 
                 if (method_exists($class, $method)) {
                     return call_user_func_array([$class, $method], []);
