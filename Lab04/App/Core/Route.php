@@ -26,8 +26,8 @@ class Route
         $route = explode('?', $requestUrl) [0];
         $action = $this->routes[$requestMethod][$route] ?? null;
         if (!$action) {
-            throw new RouteNotFoundException();
-            // echo '<h2>Lỗi không tìm thấy trang</h2>';
+            // throw new RouteNotFoundException();
+            echo '<h2>Lỗi không tìm thấy trang</h2>';
         }
         if (is_callable($action)) {
             return call_user_func($action);

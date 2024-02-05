@@ -1,4 +1,5 @@
 <?php
+session_start();
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 require_once 'vendor/autoload.php';
 define('_DIR_ROOT_', __DIR__);
@@ -109,9 +110,9 @@ $router = new Route();
                     ->get(
                         '/login', [App\Login::class, 'login'])
                     ->post(
-                        '/login', [App\Login::class, 'login'])
+                        '/loginUser', [App\Login::class, 'loginUser'])
                     ->get(
-                        '/logout', [App\Login::class, 'logout'])
+                        '/get', [App\Login::class, 'logout'])
                     
                 ;
                 
