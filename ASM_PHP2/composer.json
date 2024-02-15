@@ -1,14 +1,14 @@
 {
-    "name": "app/php",
-    "description": "ASM",
+    "name": "aaa/dc",
+    "description": "ASM mon php 2",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "App/"
         }
     },
     "authors": [
         {
-            "name": "trang"
+            "name": "tranghttpc02468"
         }
     ],
     "require": {}
