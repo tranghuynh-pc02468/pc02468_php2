@@ -59,7 +59,7 @@
                                     <td><img src="<?= ROOT_URL.'/uploads/'.$item['image'] ?>" alt="image" style="width: 100px"></td>
                                     <td>
                                         <a href="?url=ProductController/edit/<?= $item['id'] ?>" class="btn btn-primary">Sửa</a>
-                                        <a href="" class="btn btn-danger">Xóa</a>
+                                        <a onclick="return confirm(`Bạn có chắc muốn xóa không?`);"  href="?url=ProductController/delete/<?= $item['id'] ?>" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

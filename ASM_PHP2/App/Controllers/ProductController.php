@@ -168,6 +168,20 @@ class ProductController extends BaseController
         }
     }
 
+    function delete($id){
+        $product = new Product();
+        $data = $product->deleteProduct($id);
 
+        // dữ liệu ở đây lấy từ repositories hoặc model
+        if ($data) {
+            $data = $product->getAllProduct();
+            // $this->_renderBase->renderHeader();
+            // $this->load->render('layouts/client/slider');
+            // $this->load->render('admin/category/index', $data);
+            header('location: ?url=ProductController/index');
+        } else {
+            echo 'Xoa loi';
+        }
+    }
 
 }

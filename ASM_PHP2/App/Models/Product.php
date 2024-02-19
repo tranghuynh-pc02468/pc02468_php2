@@ -32,6 +32,9 @@ class Product extends BaseModel{
         return $this->update($id, $data);
     }
 
+    public function deleteProduct($id){
+        return $this->delete($id);
+    }
 
 
 }
