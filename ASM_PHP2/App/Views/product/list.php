@@ -1,8 +1,9 @@
+<main id="main" class="main">
 <div class="pagetitle">
     <h1>Sản phẩm</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="">Trang chủ</a></li>
             <li class="breadcrumb-item active">Sản phẩm</li>
         </ol>
     </nav>
@@ -25,44 +26,44 @@
                                     <th>Tên</th>
                                     <th>Giá</th>
                                     <th>Số lượng</th>
+                                    <th>Trạng thái</th>
                                     <th>Hình ảnh</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
+                                <?php
+                                    $i=1;
+                                    foreach ($data as $item):
+                                        if($item['price_sale'] !== 0){
+                                            $tem = 100 - ($item['price_sale']*100/$item['price']);
+                                            echo '';
+                                        }
+                                ?>
                                 <tr>
-                                    <th>1</th>
-                                    <td>Ghế ăn Coastal xanh</td>
-                                    <td>4.080.000 đ</td>
-                                    <td>10</td>
-                                    <td><img src="https://nhaxinh.com/wp-content/uploads/2023/07/Ghe-an-Coastal-xanh-2.jpg" style="width:80px" alt=""></td>
+                                    <th><?= $i++ ?></th>
+                                    <td><?= $item['name'] ?></td>
+                                    <td><?= $item['price_sale']==0 ? number_format($item['price']) : number_format($item['price_sale']) ?>đ
+                                        <?php
+                                        if((int)$item['price_sale'] !== 0){
+                                            var_dump($item['price_sale']);
+                                            $tem = 100 - ($item['price_sale']*100/$item['price']);
+                                            echo '<br>
+                                                <span class="text-decoration-line-through text-secondary">'. number_format($item['price']) .'đ</span> <span class="badge text-bg-warning text-danger">-'.  $tem .'%</span>
+                                            ';
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><?= $item['quantity'] ?></td>
+                                    <td><span class="badge <?= $item['status'] == 0 ? 'bg-secondary' : 'bg-primary' ?>"><?= $item['status'] == 0 ? 'Ẩn' : 'Hiển thị' ?></span></td>
+                                    <td><img src="<?= ROOT_URL.'/uploads/'.$item['image'] ?>" alt="image" style="width: 100px"></td>
                                     <td>
-                                        <a href="" class="btn btn-primary">Sửa</a>
+                                        <a href="?url=ProductController/edit/<?= $item['id'] ?>" class="btn btn-primary">Sửa</a>
                                         <a href="" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td>Tủ giày Caruso 2 ngăn nâu75X77 86217K</td>
-                                    <td><span class="text-decoration-line-through">14.080.000 đ</span> <br> 10.990.000 đ  </td>
-                                    <td>10</td>
-                                    <td><img src="https://nhaxinh.com/wp-content/uploads/2022/07/TU-GIAY-CARUSO-DBLE-BRZ-75X77-86217K.jpg" style="width:80px" alt=""></td>
-                                    <td>
-                                        <a href="" class="btn btn-primary">Sửa</a>
-                                        <a href="" class="btn btn-danger">Xóa</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>3</th>
-                                    <td>Sofa Jazz 3 chỗ hiện đại da cognac</td>
-                                    <td>4.080.000 đ</td>
-                                    <td>10</td>
-                                    <td><img src="https://nhaxinh.com/wp-content/uploads/2021/10/sofa-jazz-3-cho-hien-dai-da-that-chan-kim-loai-81212-mau-nau.jpg" style="width:80px" alt=""></td>
-                                    <td>
-                                        <a href="" class="btn btn-primary">Sửa</a>
-                                        <a href="" class="btn btn-danger">Xóa</a>
-                                    </td>
-                                </tr>
+                                <?php endforeach; ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -77,3 +78,4 @@
         </div>
     </div>
 </section>
+</main>

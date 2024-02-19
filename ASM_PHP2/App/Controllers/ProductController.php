@@ -25,8 +25,8 @@ class ProductController extends BaseController
     function index()
     {
         // dữ liệu ở đây lấy từ repositories hoặc model
-        $category = new Product();
-        $data = $category -> getAllProduct();
+        $product = new Product();
+        $data = $product -> getAllProduct();
 
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderAdminSidebar();
@@ -104,8 +104,8 @@ class ProductController extends BaseController
     }
 
     function edit($id){
-        $category = new Product();
-        $data = $category->getOneProduct($id);
+        $product = new Product();
+        $data = $product->getOneProduct($id);
 
         // dữ liệu ở đây lấy từ repositories hoặc model
         $this->_renderBase->renderAdminHeader();
