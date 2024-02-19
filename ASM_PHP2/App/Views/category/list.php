@@ -1,3 +1,4 @@
+<main id="main" class="main">
 <div class="pagetitle">
     <h1>Danh mục</h1>
     <nav>
@@ -18,47 +19,27 @@
                         <h5 class="card-title">Danh sách danh mục</h5>
                         <!-- Bordered Table -->
                         <div class="table-responsive">
-                            <table class="table ">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên</th>
+                                    <th>Trạng thái</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
+                                <?php $i=1; foreach ($data as $item): ?>
                                 <tr>
-                                    <th>1</th>
-                                    <td>Sofa</td>
+                                    <th><?= $i++; ?></th>
+                                    <td><?= $item['name'] ?></td>
+                                    <td><span class="badge <?= $item['status'] == 0 ? 'bg-secondary' : 'bg-primary' ?>"><?= $item['status'] == 0 ? 'Ẩn' : 'Hiển thị' ?></span></td>
                                     <td>
-                                        <a href="" class="btn btn-primary">Sửa</a>
-                                        <a href="" class="btn btn-danger">Xóa</a>
+                                        <a href="?url=CategoryController/edit/<?= $item['id'] ?>" class="btn btn-primary">Sửa</a>
+                                        <a onclick="return confirm(`Bạn có chắc muốn xóa không?`);" href="?url=CategoryController/delete/<?= $item['id'] ?>" type="button" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td>Giường ngủ</td>
-                                    <td>
-                                        <a href="" class="btn btn-primary">Sửa</a>
-                                        <a href="" class="btn btn-danger">Xóa</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th >3</th>
-                                    <td>Bàn ăn</td>
-                                    <td>
-                                        <a href="" class="btn btn-primary">Sửa</a>
-                                        <a href="" class="btn btn-danger">Xóa</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th >4</th>
-                                    <td>Ghế ăn</td>
-                                    <td>
-                                        <a href="" class="btn btn-primary">Sửa</a>
-                                        <a href="" class="btn btn-danger">Xóa</a>
-                                    </td>
-                                </tr>
+                                <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -73,3 +54,4 @@
         </div>
     </div>
 </section>
+</main>

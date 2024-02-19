@@ -18,7 +18,7 @@ class Database
     private static $dbPort = '3306';
 
 
-    public function PDO()
+    public function PdO()
     {
         try {
             $conn = new PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName, self::$dbUser, self::$dbPassword);

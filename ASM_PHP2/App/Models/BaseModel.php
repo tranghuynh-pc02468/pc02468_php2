@@ -23,7 +23,7 @@ abstract class BaseModel implements CrudInterface
         $this->_connection = new Database();
     }
 
-    abstract public function getAllWithPaginate(int $limit, int $offset);
+//    abstract public function getAllWithPaginate(int $limit, int $offset);
 
     public function getAll()
     {
@@ -117,7 +117,7 @@ abstract class BaseModel implements CrudInterface
 
     public function get()
     {
-        $stmt = $this->_connection->PDO()->prepare($this->_query);
+        $stmt = $this->_connection->PdO()->prepare($this->_query);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -137,6 +137,30 @@ abstract class BaseModel implements CrudInterface
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function insertData($table, $data)
+    {
+
+        if (!empty($data)) {
+
+            $fielStr  = '';
+            $valueStr = '';
+            foreach ($data as $key => $value) {
+                $fielStr .= $key . ',';
+                $valueStr .= "'" . $value . "',";
+            }
+
+            $fielStr  = rtrim($fielStr, ',');
+            $valueStr = rtrim($valueStr, ',');
+            $sql      = "INSERT INTO  $table($fielStr) VALUES ($valueStr)";
+
+            $status = $this->query($sql);
+            if (!$status)
+                return false;
+        }
+        return true;
+    }
+
 
     public function updateData($table, $data, $condition = '')
     {

@@ -16,12 +16,12 @@
     </a>
     <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="">
+        <a href="?url=CategoryController/index">
           <i class="bi bi-circle"></i><span>Danh sách</span>
         </a>
       </li>
       <li>
-        <a href="components-accordion.html">
+        <a href="?url=CategoryController/create">
           <i class="bi bi-circle"></i><span>Thêm mới</span>
         </a>
       </li>
@@ -34,12 +34,12 @@
     </a>
     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li>
-        <a href="tables-general.html">
+        <a href="?url=ProductController/index">
           <i class="bi bi-circle"></i><span>Danh sách</span>
         </a>
       </li>
       <li>
-        <a href="tables-data.html">
+        <a href="?url=ProductController/create">
           <i class="bi bi-circle"></i><span>Thêm mới</span>
         </a>
       </li>
