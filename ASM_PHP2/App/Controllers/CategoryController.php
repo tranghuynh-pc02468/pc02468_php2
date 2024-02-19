@@ -76,5 +76,42 @@ class CategoryController extends BaseController
         }
     }
 
+    function edit($id){
+        $category = new Category();
+        $data = $category->getOneCategory($id);
+
+        // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderAdminHeader();
+        $this->_renderBase->renderAdminSidebar();
+        $this->load->render('category/edit', $data);
+        $this->_renderBase->renderAdminFooter();
+    }
+
+    function update($id)
+    {
+        if (isset($_POST['btn-submit'])) {
+            $name = $_POST['name'];
+            $status = $_POST['status'];
+
+            $data = [
+                'name' => $name,
+                'status' => $status,
+            ];
+
+            $category = new Category();
+            $result = $category->updateCategory($id, $data);
+
+            if ($result) {
+                // $data = $category->getAllCategory();
+
+                // $this->load->render('admin/category/index', $data);
+                header('location: ?url=CategoryController/index');
+            } else {
+                var_dump('khong cap nhat');
+            }
+        } else {
+            var_dump('ko post');
+        }
+    }
 
 }

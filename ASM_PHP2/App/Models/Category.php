@@ -24,4 +24,13 @@ class Category extends BaseModel{
         return $this->create($data);
     }
 
+    public function getOneCategory($id){
+        return $this->select()->where('id','=',$id)->first();
+    }
+
+    public function updateCategory($id, $data){
+        return $this->update($id, $data);
+    }
+
+
 }
