@@ -70,10 +70,11 @@ class RegisterController extends BaseController
             }
 
             if(!isset($_SESSION['error'])) {
+                $password = password_hash($_POST['password2'], PASSWORD_DEFAULT);
                 $data = [
                     'name' => $_POST['name'],
                     'email' => $_POST['email'],
-                    'password' => $_POST['password2'],
+                    'password' => $password,
                     'role' => '1',
                     'status' => '1'
                 ];
