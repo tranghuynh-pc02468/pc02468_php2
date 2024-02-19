@@ -25,6 +25,9 @@ class UserController extends BaseController
 
     function index()
     {
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         // dữ liệu ở đây lấy từ repositories hoặc model
         $user = new User();
         $data = $user -> getAllUser();

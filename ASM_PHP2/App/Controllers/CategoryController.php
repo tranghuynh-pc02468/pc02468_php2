@@ -25,6 +25,9 @@ class CategoryController extends BaseController
 
     function index()
     {
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         // dữ liệu ở đây lấy từ repositories hoặc model
         $user = new Category();
         $data = $user -> getAllCategory();
@@ -37,6 +40,9 @@ class CategoryController extends BaseController
 
     function create()
     {
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         // dữ liệu ở đây lấy từ repositories hoặc model
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderAdminSidebar();
@@ -77,6 +83,9 @@ class CategoryController extends BaseController
     }
 
     function edit($id){
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         $category = new Category();
         $data = $category->getOneCategory($id);
 
@@ -115,6 +124,9 @@ class CategoryController extends BaseController
     }
 
     function delete($id){
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         $category = new Category();
         $data = $category->deleteCategory($id);
 

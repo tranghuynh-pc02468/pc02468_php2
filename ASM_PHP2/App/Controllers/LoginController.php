@@ -76,5 +76,8 @@ class LoginController extends BaseController
 
     }
 
-
+    function logout(){
+        session_destroy();
+        $this->redirect(ROOT_URL);
+    }
 }

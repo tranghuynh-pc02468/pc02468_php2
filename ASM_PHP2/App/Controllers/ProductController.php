@@ -24,6 +24,9 @@ class ProductController extends BaseController
 
     function index()
     {
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         // dữ liệu ở đây lấy từ repositories hoặc model
         $product = new Product();
         $data = $product -> getAllProduct();
@@ -36,6 +39,9 @@ class ProductController extends BaseController
 
     function create()
     {
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         $category = new Category();
         $data = $category -> getAllCategory();
 
@@ -104,6 +110,9 @@ class ProductController extends BaseController
     }
 
     function edit($id){
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         $product = new Product();
         $list = $product->getOneProduct($id);
         $category = new Category();
@@ -169,6 +178,9 @@ class ProductController extends BaseController
     }
 
     function delete($id){
+        if(!isset($_SESSION['user'])){
+            $this->redirect(ROOT_URL);
+        }
         $product = new Product();
         $data = $product->deleteProduct($id);
 

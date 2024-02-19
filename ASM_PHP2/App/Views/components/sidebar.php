@@ -54,7 +54,7 @@
   </li><!-- End Profile Page Nav -->
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-login.html">
+    <a class="nav-link collapsed" href="?url=LoginController/logout">
       <i class="ri-logout-box-line"></i>
       <span>Đăng xuất</span>
     </a>
