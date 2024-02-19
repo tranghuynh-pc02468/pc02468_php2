@@ -21,7 +21,7 @@ class Product extends BaseModel{
     }
 
     public function getOneProduct($id){
-        return $this->select()->where('id','=',$id)->first();
+        return $this->select()->where('products.id','=',$id)->first();
     }
 
     public function createProduct($data){
@@ -32,8 +32,6 @@ class Product extends BaseModel{
         return $this->update($id, $data);
     }
 
-    public function deleteProduct($id){
-        return $this->delete($id);
-    }
+
 
 }

@@ -71,7 +71,7 @@ class ProductController extends BaseController
             );
 
             //dimension: Kích thước  - material: Vật liệu
-            $dimension = 'C'.$_POST['height'].' - R'.$_POST['width'].' - L'.$_POST['length'];
+            $dimension = $_POST['height'].'-'.$_POST['length'].'-'.$_POST['width'];
 
             $data = [
                 'category_id' => $_POST['category_id'],
@@ -105,8 +105,14 @@ class ProductController extends BaseController
 
     function edit($id){
         $product = new Product();
-        $data = $product->getOneProduct($id);
+        $list = $product->getOneProduct($id);
+        $category = new Category();
+        $category = $category->getAllCategory();
 
+        $data = [
+            'list' => $list ,
+            'category' => $category,
+        ];
         // dữ liệu ở đây lấy từ repositories hoặc model
         $this->_renderBase->renderAdminHeader();
         $this->_renderBase->renderAdminSidebar();
@@ -117,16 +123,37 @@ class ProductController extends BaseController
     function update($id)
     {
         if (isset($_POST['btn-submit'])) {
-            $name = $_POST['name'];
-            $status = $_POST['status'];
+            // xử lý hình ảnh
+            $old_name = $_FILES['image']['name'];
+            $file_extension = pathinfo($old_name, PATHINFO_EXTENSION);
+            $new_name = date('YmdHis').'.'.$file_extension;
+            // echo $old_name .'<br>';
+            // echo $file_extension.'<br>';
+            // echo $new_name;
+            // echo _DIR_ROOT_.'/uploads/';
+            move_uploaded_file(
+                $_FILES['image']['tmp_name'],
+                _DIR_ROOT_.'/uploads/'.$new_name
+            );
+            //CDR
+            $dimension = $_POST['height'].'-'.$_POST['length'].'-'.$_POST['width'];
 
             $data = [
-                'name' => $name,
-                'status' => $status,
+                'category_id' => $_POST['category_id'],
+                'name' => $_POST['name'],
+                'price' => $_POST['price'],
+                'price_sale' => $_POST['price_sale'],
+                'quantity' => $_POST['quantity'],
+                'image' => $new_name,
+                'content' => $_POST['content'],
+                'dimension' => $dimension,
+                'material' => $_POST['material'],
+                'status' => $_POST['status'],
+
             ];
 
-            $category = new Product();
-            $result = $category->updateProduct($id, $data);
+            $product = new Product();
+            $result = $product->updateProduct($id, $data);
 
             if ($result) {
                 // $data = $category->getAllCategory();
@@ -141,20 +168,6 @@ class ProductController extends BaseController
         }
     }
 
-    function delete($id){
-        $category = new Product();
-        $data = $category->deleteProduct($id);
 
-        // dữ liệu ở đây lấy từ repositories hoặc model
-        if ($data) {
-            $data = $category->getAllProduct();
-            // $this->_renderBase->renderHeader();
-            // $this->load->render('layouts/client/slider');
-            // $this->load->render('admin/category/index', $data);
-            header('location: ?url=ProductController/index');
-        } else {
-            echo 'Xoa loi';
-        }
-    }
 
 }

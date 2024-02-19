@@ -46,10 +46,10 @@
                                     <td><?= $item['price_sale']==0 ? number_format($item['price']) : number_format($item['price_sale']) ?>đ
                                         <?php
                                         if((int)$item['price_sale'] !== 0){
-                                            var_dump($item['price_sale']);
+//                                            var_dump($item['price_sale']);
                                             $tem = 100 - ($item['price_sale']*100/$item['price']);
                                             echo '<br>
-                                                <span class="text-decoration-line-through text-secondary">'. number_format($item['price']) .'đ</span> <span class="badge text-bg-warning text-danger">-'.  $tem .'%</span>
+                                                <span class="text-decoration-line-through text-secondary">'. number_format($item['price']) .'đ</span> <span class="badge text-bg-warning text-danger">-'.  (int)$tem .'%</span>
                                             ';
                                         }
                                         ?>
