@@ -20,6 +20,8 @@ class Category extends BaseModel{
         return $this->getAll()->get();
     }
 
-
+    public function createCategory($data){
+        return $this->create($data);
+    }
 
 }

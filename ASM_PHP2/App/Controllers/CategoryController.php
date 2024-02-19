@@ -35,6 +35,46 @@ class CategoryController extends BaseController
         $this->_renderBase->renderAdminFooter();
     }
 
+    function create()
+    {
+        // dữ liệu ở đây lấy từ repositories hoặc model
+        $this->_renderBase->renderAdminHeader();
+        $this->_renderBase->renderAdminSidebar();
+        $this->load->render('category/add');
+        $this->_renderBase->renderAdminFooter();
+    }
+    function store()
+    {
+        if (isset($_POST['btn-submit'])) {
+//            // var_dump($_POST);
+//            if(empty($_POST['name'])){
+//                $_SESSION['error']['name'] = "Vui lòng nhập thông tin";
+//                header('Location: ?url:CategoryController/create');
+//            }
+//            if(empty($_POST['status'])){
+//                $_SESSION['error']['status'] = "Vui lòng chọn thông tin";
+//            }
+
+            $data = [
+                'name' => $_POST['name'],
+                'status' => $_POST['status'],
+
+            ];
+            $category = new Category();
+            $result = $category->createCategory($data);
+            // var_dump($result);
+            if ($result) {
+                header('location: ?url=CategoryController/index');
+            } else {
+                echo 'them loi';
+            }
+
+
+
+        } else {
+            echo 'ko submit';
+        }
+    }
 
 
 }
