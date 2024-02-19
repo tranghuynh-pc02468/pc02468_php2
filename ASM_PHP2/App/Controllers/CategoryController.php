@@ -114,4 +114,20 @@ class CategoryController extends BaseController
         }
     }
 
+    function delete($id){
+        $category = new Category();
+        $data = $category->deleteCategory($id);
+
+        // dữ liệu ở đây lấy từ repositories hoặc model
+        if ($data) {
+            $data = $category->getAllCategory();
+            // $this->_renderBase->renderHeader();
+            // $this->load->render('layouts/client/slider');
+            // $this->load->render('admin/category/index', $data);
+            header('location: ?url=CategoryController/index');
+        } else {
+            echo 'Xoa loi';
+        }
+    }
+
 }

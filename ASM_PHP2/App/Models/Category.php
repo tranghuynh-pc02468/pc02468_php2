@@ -32,5 +32,8 @@ class Category extends BaseModel{
         return $this->update($id, $data);
     }
 
+    public function deleteCategory($id){
+        return $this->delete($id);
+    }
 
 }
