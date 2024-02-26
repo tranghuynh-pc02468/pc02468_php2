@@ -25,9 +25,13 @@ class Category extends BaseModel{
     }
 
     public function getOneCategory($id){
-        return $this->select()->where('id','=',$id)->first();
+//        return $this->select()->where('id','=',$id)->first();
+        return $this->getOne($id);
     }
 
+    public function checkExceptionCat($id){
+        return $this->checkException($id)->get();
+    }
     public function updateCategory($id, $data){
         return $this->update($id, $data);
     }

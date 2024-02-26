@@ -29,9 +29,9 @@
                                     <label class="col-sm-2 col-form-label">Trạng thái</label>
                                     <div class="col-sm-12">
                                         <select class="form-select" aria-label="Default select example" name="status">
-                                            <option value="">--- Chọn trạng thái ---</option>
+<!--                                            <option value="">--- Chọn trạng thái ---</option>-->
                                             <option value="0">Ẩn</option>
-                                            <option value="1">Hiển thị</option>
+                                            <option value="1" selected>Hiển thị</option>
                                         </select>
                                     </div>
                                     <small class="text-danger"><?= $_SESSION['error']['status'] ?? '' ?></small>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-
+<?php unset($_SESSION['error']); ?>
                 </div>
             </div>
         </div>

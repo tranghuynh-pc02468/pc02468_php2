@@ -23,6 +23,7 @@
                             <div class="col-12">
                                 <label for="inputNanme4" class="form-label">Tên danh mục</label>
                                 <input type="text" class="form-control" id="inputNanme4" name="name" value="<?= $data['name'] ?>">
+                                <small class="text-danger"><?= $_SESSION['error']['name'] ?? '' ?></small>
                             </div>
                             <div class="col-12">
                                 <label class="col-sm-2 col-form-label">Trạng thái</label>
@@ -42,7 +43,7 @@
 
                     </div>
                 </div>
-
+                <?php unset($_SESSION['error']); ?>
 
             </div>
         </div>
