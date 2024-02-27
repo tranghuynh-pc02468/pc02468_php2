@@ -20,6 +20,17 @@ class User extends BaseModel{
         return $this->getAll()->get();
     }
 
+    public function getOneUser($id){
+        return $this->getOne($id);
+    }
+
+    public function updateUser($id, $data){
+        return $this->update($id, $data);
+    }
+
+    public function deleteUser($id){
+        return $this->delete($id);
+    }
     public function checkUserExist($email){
         return $this->select()->where('email', '=', $email)->first();
     }
@@ -30,10 +41,10 @@ class User extends BaseModel{
 
     public function registerUser($data){
         // $tableName = $this->tableName;
-        $user = $this->insert($this->table,$data);
+        return $this->create($data);
     }
 
-    public function create($data){
-        var_dump($this->tableName);
+    public function createUser($data){
+        return $this->create($data);
     }
 }

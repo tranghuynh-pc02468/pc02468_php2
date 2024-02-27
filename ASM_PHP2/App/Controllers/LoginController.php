@@ -56,7 +56,7 @@ class LoginController extends BaseController
 //                $_SESSION['error']['password'] = "Vui lòng nhập thông tin!";
 //            }
 
-            if($check && password_verify($_POST['password'], $check['password'])){
+            if($check && password_verify($_POST['password'], $check['password']) && $check['role'] == 1){
                 $_SESSION['user'] = $check;
                 $this->redirect(ROOT_URL);
             }elseif(empty($_POST['email']) || empty($_POST['password'])){

@@ -59,29 +59,29 @@
                         <div class="card mb-3">
 
                             <div class="card-body">
-
+<?= $_SESSION['error']['mgs'] ?? '' ?>
                                 <div class="pt-4 pb-2">
                                     <h5 class="card-title text-center pb-0 fs-4">Tạo tài khoản</h5>
-                                    <p class="text-center text-danger"><?= $_SESSION['error']['exist']; ?></p>
+                                    <p class="text-center text-danger"><?= $_SESSION['error']['exist'] ?? '' ?></p>
                                 </div>
 
                                 <form class="row g-3" action="?url=RegisterController/store" method="POST">
                                     <div class="col-12">
                                         <label for="yourName" class="form-label">Họ tên</label>
                                         <input type="text" name="name" class="form-control" id="yourName">
-                                        <small class="text-danger"><?= $_SESSION['error']['name'] ?></small>
+                                        <small class="text-danger"><?= $_SESSION['error']['name'] ?? '' ?></small>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="yourEmail" class="form-label">Email</label>
                                         <input type="text" name="email" class="form-control" id="yourEmail">
-                                        <small class="text-danger"><?= $_SESSION['error']['email'] ?></small>
+                                        <small class="text-danger"><?= $_SESSION['error']['email'] ?? '' ?></small>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="yourPassword" class="form-label">Mật khẩu</label>
                                         <input type="password" name="password" class="form-control" id="yourPassword">
-                                        <small class="text-danger"><?= $_SESSION['error']['password'] ?></small>
+                                        <small class="text-danger"><?= $_SESSION['error']['password'] ?? '' ?></small>
                                     </div>
 
                                     <div class="col-12 mb-4">

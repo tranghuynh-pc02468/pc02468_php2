@@ -13,6 +13,13 @@
     <div class="row">
         <!-- Left side columns -->
         <div class="col-lg-12">
+            <?php if(isset($_SESSION['mgs'])): ?>
+                <div class="row">
+                    <div class="alert <?= $_SESSION['mgs'] == '1' ? "alert-success" : 'alert-danger' ?> alert-dismissible fade show" role="alert">
+                        <?= $_SESSION['mgs'] == '1' ? "Xóa thành công" : 'Xóa thất bại' ?>
+                    </div>
+                </div>
+            <?php endif; ?>
             <div class="row">
                 <div class="card">
                     <div class="card-body">
@@ -36,12 +43,13 @@
                                         <th><?= $i ?></th>
                                         <td><?= $item['name'] ?></td>
                                         <td><?= $item['email'] ?></td>
-                                        <td><?= $item['status'] == 0 ? 'Ẩn' : 'Hiển thị' ?></td>
+                                        <td><span class="badge <?= $item['status'] == 0 ? 'bg-secondary' : 'bg-primary' ?>"><?= $item['status'] == 0 ? 'Ẩn' : 'Hiển thị' ?></span></td>
                                         <td><?= $item['role'] == 0 ? 'Khách hàng' : 'Quản trị' ?></td>
                                         <td>
-                                            <a href="" class="btn btn-primary">Sửa</a>
-                                            <a href="" class="btn btn-warning">Xóa</a>
+                                            <a href="?url=UserController/edit/<?= $item['id'] ?>" class="btn btn-primary">Sửa</a>
+                                            <a onclick="return confirm(`Bạn có chắc muốn xóa không?`);" href="?url=UserController/delete/<?= $item['id'] ?>" class="btn btn-warning" type="button">Xóa</a>
                                         </td>
+
                                     </tr>
                                 <?php $i++; endforeach; ?>
                                 
@@ -54,7 +62,7 @@
                     </div>
                 </div>
 
-
+                <?php unset($_SESSION['mgs']) ?>
             </div>
         </div>
     </div>

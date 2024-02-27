@@ -59,8 +59,8 @@ class RegisterController extends BaseController
 
             if (empty($_POST['password'])) {
                 $_SESSION['error']['password'] = "Vui lòng nhập thông tin!";
-            } elseif (strlen($_POST['password']) < 5){
-                $_SESSION['error']['password'] = "Mật khẩu phải trên 5 ký tự";
+            } elseif (strlen($_POST['password']) < 4){
+                $_SESSION['error']['password'] = "Mật khẩu phải trên 4 ký tự";
             }
 
             if ($_POST['password'] !== $_POST['password2']) {
@@ -75,19 +75,17 @@ class RegisterController extends BaseController
                     'name' => $_POST['name'],
                     'email' => $_POST['email'],
                     'password' => $password,
-                    'role' => '1',
+                    'role' => '0',
                     'status' => '1'
                 ];
-            }
+
                 $user = new User();
                 $result = $user->registerUser($data);
                 // var_dump($result);
-                if ($result) {
-                    header('location: ?url=LoginController/index');
-                } else {
-                    $message_error = "Đăng ký không thành công!";
-                    header('location: ?url=RegisterController/index');
-                }
+                header('location: ?url=LoginController/index');
+            }else{
+                header('location: ?url=RegisterController/index');
+            }
 
         } else {
             echo 'ko submit';

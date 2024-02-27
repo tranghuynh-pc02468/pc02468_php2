@@ -62,7 +62,7 @@
 
                                 <div class="pt-4 pb-2">
                                     <h5 class="card-title text-center pb-0 fs-4">Đăng nhập</h5>
-                                    <p class="text-center small  <?= $_SESSION['error']['mgs'] ? 'text-danger' : '' ?> "><?= $_SESSION['error']['mgs'] ?? 'Nhập email & mật khẩu để đăng nhập' ?></p>
+                                    <p class="text-center small  <?= isset($_SESSION['error']['mgs']) ? 'text-danger' : '' ?> "><?= $_SESSION['error']['mgs'] ?? 'Nhập email & mật khẩu để đăng nhập' ?></p>
                                 </div>
 
                                 <form class="row g-3" action="?url=LoginController/store" method="POST">

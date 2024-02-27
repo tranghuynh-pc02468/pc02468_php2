@@ -11,6 +11,7 @@ use App\Models\QueryBuilder;
 abstract class BaseModel implements CrudInterface
 {
     use QueryBuilder;
+
     protected $table;
 
     private $_connection;
@@ -34,9 +35,17 @@ abstract class BaseModel implements CrudInterface
 
     public function getOne($id)
     {
-        return [];
+        $this->_query = "SELECT * FROM $this->tableName WHERE id=$id";
+
+        $stmt = $this->_connection->PdO()->prepare($this->_query);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function checkException($id){
+        $this->_query = "SELECT * FROM $this->tableName WHERE id != $id";
+        return $this;
+    }
     public function create(array $data)
     {
         $this->_query = "INSERT INTO $this->table (";
@@ -45,7 +54,7 @@ abstract class BaseModel implements CrudInterface
         }
         $this->_query = rtrim($this->_query, ", ");
 
-        $this->_query .=   " ) VALUES (";
+        $this->_query .= " ) VALUES (";
         foreach ($data as $key => $value) {
             $this->_query .= "'$value', ";
         }
@@ -101,11 +110,12 @@ abstract class BaseModel implements CrudInterface
         return $stmt->execute();
         // return $this->_query;
     }
+
     public function delete(int $id): bool
     {
         $this->_query = "DELETE FROM $this->table WHERE id=$id";
 
-        $stmt   = $this->_connection->PdO()->prepare($this->_query);
+        $stmt = $this->_connection->PdO()->prepare($this->_query);
         $stmt->execute();
         $affected_rows = $stmt->rowCount();
         return $affected_rows;
@@ -113,7 +123,7 @@ abstract class BaseModel implements CrudInterface
 
 
     //------------------//
-    
+
 
     public function get()
     {
@@ -125,14 +135,14 @@ abstract class BaseModel implements CrudInterface
 
     public function orderBy(string $order = 'ASC')
     {
-        $this->_query = $this->_query . "order by " . $order;
+        $this->_query = $this->_query . " order by " . $order;
 
         return $this;
     }
 
     public function limit(int $limit = 10)
     {
-        $stmt   = $this->_connection->PDO()->prepare($this->_query);
+        $stmt = $this->_connection->PDO()->prepare($this->_query);
         $result = $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -143,16 +153,16 @@ abstract class BaseModel implements CrudInterface
 
         if (!empty($data)) {
 
-            $fielStr  = '';
+            $fielStr = '';
             $valueStr = '';
             foreach ($data as $key => $value) {
                 $fielStr .= $key . ',';
                 $valueStr .= "'" . $value . "',";
             }
 
-            $fielStr  = rtrim($fielStr, ',');
+            $fielStr = rtrim($fielStr, ',');
             $valueStr = rtrim($valueStr, ',');
-            $sql      = "INSERT INTO  $table($fielStr) VALUES ($valueStr)";
+            $sql = "INSERT INTO  $table($fielStr) VALUES ($valueStr)";
 
             $status = $this->query($sql);
             if (!$status)
@@ -176,7 +186,7 @@ abstract class BaseModel implements CrudInterface
                 }
             }
             $updateStr = rtrim($updateStr, ',');
-            $sql       = "UPDATE $table SET $updateStr";
+            $sql = "UPDATE $table SET $updateStr";
             if (!empty($condition)) {
                 $sql = "UPDATE $table SET $updateStr WHERE $condition";
             }
