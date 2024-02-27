@@ -127,13 +127,16 @@ trait QueryBuilder
 
     public function get()
     {
-        // echo $this->innerJoin;
-        $sqlQuery = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->leftJoin $this->where $this->groupBy  $this->orderBy  $this->limit";
-        $query    = $this->query($sqlQuery);
-        $this->resetQuery();
-        if (!empty($query))
-            return $query->fetchAll(PDO::FETCH_ASSOC);
-        return false;
+//        // echo $this->innerJoin;
+//        $sqlQuery = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->leftJoin $this->where $this->groupBy  $this->orderBy  $this->limit";
+//        $query    = $this->query($sqlQuery);
+//        $this->resetQuery();
+//        if (!empty($query))
+//            return $query->fetchAll(PDO::FETCH_ASSOC);
+//        return false;
+        $stmt   = $this->_connection->PdO()->prepare($this->_query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     

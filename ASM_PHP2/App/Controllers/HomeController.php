@@ -79,4 +79,8 @@ class HomeController extends BaseController
         // dữ liệu ở đây lấy từ repositories hoặc model
         $this->load->render('layouts/client/home_product', $data);
     }
+
+    function Error(){
+        $this->load->render('404');
+    }
 }

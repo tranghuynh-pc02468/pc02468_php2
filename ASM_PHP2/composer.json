@@ -11,5 +11,7 @@
             "name": "tranghttpc02468"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
 }
